@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.semana1pv.ui.screens.LoginScreen
+import com.example.semana1pv.ui.screens.SpashScreen
 import com.example.semana1pv.ui.theme.Semana1pvTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,66 +28,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Semana1pvTheme {
-                    Greeting(
-                        name = "Android"
-                    )
+                LoginScreen()
 
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Column(modifier = Modifier.fillMaxSize()
-                .padding(16.dp)){
-        Text(
-            text = "HOLAAA $name!",
-            modifier = Modifier.fillMaxWidth()
-                .padding(16.dp)
-                .background(Color.Red)
-
-        )
-        titutlo()
-        Row{
-            subtitulo()
-            subtitulo()
-        }
-        titutlo()
-        titutlo()
-        subtitulo()
-        titutlo()
-        subtitulo()
-        titutlo()
-        subtitulo()
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun titutlo(){
-    Text(text = "Titulo",
-        modifier = Modifier.fillMaxWidth()
-            .padding(0.dp)
-            .background(Color.Blue)
-    )
-
-}
-
-@Composable
-fun subtitulo(){
-    Text(text = "Titulo",
-        modifier = Modifier
-            .padding(0.dp)
-            .background(Color.Green)
-    )
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Semana1pvTheme {
-        Greeting("Android")
     }
 }
