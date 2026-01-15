@@ -18,7 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.example.semana1pv.navigation.NavGraph
 import com.example.semana1pv.ui.screens.LoginScreen
+import com.example.semana1pv.ui.screens.RegistroScreen
 import com.example.semana1pv.ui.screens.SpashScreen
 import com.example.semana1pv.ui.theme.Semana1pvTheme
 
@@ -28,7 +31,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Semana1pvTheme {
-                LoginScreen()
+                val navController = rememberNavController()
+                NavGraph(navController = navController)
 
             }
         }

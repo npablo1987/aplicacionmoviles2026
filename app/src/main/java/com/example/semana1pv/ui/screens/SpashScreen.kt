@@ -27,7 +27,9 @@ import com.example.semana1pv.R
 
 @Preview(showBackground = true)
 @Composable
-fun SpashScreen() {
+fun SpashScreen(
+    onStartClick: () -> Unit = {}
+) {
 
         Box{
             Image(
@@ -45,7 +47,7 @@ fun SpashScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Button(
-                    onClick = {  },
+                    onClick =  onStartClick,
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
                         .height(56.dp),

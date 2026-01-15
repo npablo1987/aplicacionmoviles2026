@@ -18,6 +18,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -50,7 +52,9 @@ import com.example.semana1pv.ui.theme.TextMuted
 
 @Preview(showBackground = true)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onRegistroClick: () -> Unit = {}
+) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -176,7 +180,7 @@ fun LoginScreen() {
                     shape = RoundedCornerShape(16.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = BandGreen,
-                        unfocusedContainerColor = BordernSoft,
+                        unfocusedContainerColor = Color.White,
                         focusedLabelColor = BandGreen,
                         cursorColor = BandGreen,
                     )
@@ -198,11 +202,38 @@ fun LoginScreen() {
                     shape = RoundedCornerShape(16.dp),
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = BandGreen,
-                        unfocusedContainerColor = BordernSoft,
+                        unfocusedContainerColor = Color.White,
                         focusedLabelColor = BandGreen,
                         cursorColor = BandGreen,
                     )
                 )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Button(
+                    onClick = onRegistroClick,
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                        .height(56.dp),
+                    shape = MaterialTheme.shapes.medium,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF2CBE32),
+                        contentColor = Color.White
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(
+                        defaultElevation = 2.dp,
+                        pressedElevation = 4.dp,
+                        disabledElevation = 0.dp
+                    )
+
+
+                ) {
+                    Text(
+                        text = "Iniciar",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
 
             }
         }

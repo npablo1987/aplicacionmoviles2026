@@ -19,3 +19,5 @@ val TextMuted = Color(0xFF6B7280)
 val BandGreen = Color(0xFF2CBE32)
 
 val BordernSoft = Color(0xFFE5E7EB)
+
+val BrandOrange = Color(0xFFFD7014)
