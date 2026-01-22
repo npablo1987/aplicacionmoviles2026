@@ -35,6 +35,9 @@ fun NavGraph(navController: NavHostController){
             LoginScreen(
                 onRegistroClick = {
                     navController.navigate(Screen.Registro.route)
+                },
+                onLoginSuccess = {
+                    navController.navigate(Screen.Registro.route)
                 }
             )
         }
@@ -42,6 +45,9 @@ fun NavGraph(navController: NavHostController){
         composable(Screen.Registro.route){
             RegistroScreen(
                 onLoginClick = {
+                    navController.navigate(Screen.Login.route)
+                },
+                onRegistroClick = {
                     navController.navigate(Screen.Login.route)
                 }
             )

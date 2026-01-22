@@ -1,5 +1,7 @@
 package com.example.semana1pv.ui.screens
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -19,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -26,13 +29,17 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.semana1pv.R
+import com.example.semana1pv.model.Persona
+import com.example.semana1pv.service.PersonaService
 import com.example.semana1pv.ui.theme.*
 import com.example.semana1pv.ui.theme.*
+import com.example.semana1pv.util.Validaciones
 
 @Composable
 fun RegistroScreen(
     // ** ACA NUEVO - Callback para navegar a Login
-    onLoginClick: () -> Unit = {}
+    onLoginClick: () -> Unit = {},
+    onRegistroClick: () -> Unit = {}
 ) {
 
     var rut by remember { mutableStateOf("") }
@@ -49,6 +56,7 @@ fun RegistroScreen(
     var showPassword by remember { mutableStateOf(false) }
     var showConfirmPassword by remember { mutableStateOf(false) }
 
+    var context = LocalContext.current
     val canSubmit = rut.isNotBlank() && nombre.isNotBlank() && apellidoPaterno.isNotBlank() &&
             apellidoMaterno.isNotBlank() && region.isNotBlank() && comuna.isNotBlank() &&
             telefono.isNotBlank() && email.isNotBlank() && password.isNotBlank() &&
@@ -377,7 +385,28 @@ fun RegistroScreen(
                     Spacer(Modifier.height(10.dp))
 
                     Button(
-                        onClick = { /* SOLO DISEÑO */ },
+                        onClick = {
+                            val validacionCorreo = Validaciones.validarCorreo(email)
+                            val validacionPassword = Validaciones.validarPassword(password)
+                            val validacionRut = Validaciones.validarRut(rut)
+
+                            val nuevaPersona = Persona(
+                                rut =rut,
+                                nombre = nombre,
+                                apellidoPaterno = apellidoPaterno,
+                                apellidoMaterno = apellidoMaterno,
+                                region = region,
+                                comuna = comuna,
+                                telefono = telefono,
+                                email = email,
+                                password = password
+                            )
+
+                            PersonaService.agregarPersona(nuevaPersona)
+                            Toast.makeText(context, "Registro exitoso", Toast.LENGTH_SHORT).show()
+                            Log.d("RegistroScreen", "Registro ok $nuevaPersona")
+                            onRegistroClick()
+                        },
                         enabled = canSubmit,
                         modifier = Modifier
                             .fillMaxWidth()

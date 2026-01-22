@@ -45,6 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.semana1pv.ui.theme.BackgroundLigth
 import com.example.semana1pv.R
+import com.example.semana1pv.service.PersonaService
 import com.example.semana1pv.ui.theme.BandGreen
 import com.example.semana1pv.ui.theme.BordernSoft
 import com.example.semana1pv.ui.theme.TextDark
@@ -211,7 +212,15 @@ fun LoginScreen(
                 Spacer(modifier = Modifier.height(12.dp))
 
                 Button(
-                    onClick = onRegistroClick,
+                    onClick = {
+                        val usuario = PersonaService.iniciarSesion(email, password)
+                        if(usuario != null){
+                            onLoginSuccess()
+                        }else{
+                            Toast.makeText(context, "Usuario no encontrado", Toast.LENGTH_SHORT).show()
+                        }
+
+                    },
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
                         .height(56.dp),
