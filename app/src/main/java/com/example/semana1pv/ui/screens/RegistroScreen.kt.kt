@@ -386,9 +386,7 @@ fun RegistroScreen(
 
                     Button(
                         onClick = {
-                            val validacionCorreo = Validaciones.validarCorreo(email)
-                            val validacionPassword = Validaciones.validarPassword(password)
-                            val validacionRut = Validaciones.validarRut(rut)
+
 
                             val nuevaPersona = Persona(
                                 rut =rut,

@@ -1,7 +1,9 @@
 package com.example.semana1pv.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -48,17 +51,20 @@ import com.example.semana1pv.R
 import com.example.semana1pv.service.PersonaService
 import com.example.semana1pv.ui.theme.BandGreen
 import com.example.semana1pv.ui.theme.BordernSoft
+import com.example.semana1pv.ui.theme.BrandOrange
 import com.example.semana1pv.ui.theme.TextDark
 import com.example.semana1pv.ui.theme.TextMuted
 
 @Preview(showBackground = true)
 @Composable
 fun LoginScreen(
-    onRegistroClick: () -> Unit = {}
+    onRegistroClick: () -> Unit = {},
+    onLoginSuccess: () -> Unit = {}
 ) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var context = LocalContext.current
 
     Surface(modifier = Modifier.fillMaxSize(),
         color = BackgroundLigth
@@ -241,6 +247,27 @@ fun LoginScreen(
                         text = "Iniciar",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
+                    )
+                }
+
+                Spacer(Modifier.height(12.dp)) // Espaciador
+
+                Row( // Fila para navegación a registro
+                    modifier = Modifier
+                        .fillMaxWidth() // Ancho completo
+                        .clickable { onRegistroClick() }, // Clickeable
+                    horizontalArrangement = Arrangement.Center, // Centrado horizontalmente
+                    verticalAlignment = Alignment.CenterVertically // Centrado verticalmente
+                ) {
+                    Text( // Texto
+                        text = "¿No tienes cuenta?", // Texto
+                        color = TextMuted // Color gris
+                    )
+                    Spacer(Modifier.width(6.dp)) // Espaciador
+                    Text( // Texto clickeable
+                        text = "Crear cuenta", // Texto
+                        color = BrandOrange, // Naranja
+                        fontWeight = FontWeight.Bold // Negrita
                     )
                 }
 
